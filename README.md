@@ -33,7 +33,7 @@ make run
 
 ## Requirement Limitation
 
-1. If single command (i.e. neg, abs, sqrt, cbrt, etc.) is given a value or additional argument, it will return an error and exit the program.
+1. If a single command (i.e. neg, abs, sqrt, cbrt, etc.) is given a value or additional argument, it will return an error and exit the program.
 2. Any complex arithmetic operator is done by golang built-in package called 'math' to ensure correctness.
-3. Division by 0 will result NaN.
-4. A result of NaN won't immediately exit the program. Instead user can cancel the calculation or restart the program.
+3. Division by 0 will result to NaN.
+4. A result of NaN won't immediately exit the program. Instead users can cancel the calculation or restart the program.
