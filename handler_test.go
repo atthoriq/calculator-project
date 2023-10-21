@@ -135,7 +135,7 @@ func Test_calculatorHandler_Handle_Command_Cases(t *testing.T) {
 			want:    "2.00",
 			wantErr: false,
 			expectation: func() {
-				mockCalc.EXPECT().AddCurrent(float64(2)).Return(float64(2))
+				mockCalc.EXPECT().Add(float64(2)).Return(float64(2))
 			},
 		},
 		{
@@ -149,7 +149,7 @@ func Test_calculatorHandler_Handle_Command_Cases(t *testing.T) {
 			want:    "2.00",
 			wantErr: false,
 			expectation: func() {
-				mockCalc.EXPECT().SubtractCurrent(float64(2)).Return(float64(2))
+				mockCalc.EXPECT().Subtract(float64(2)).Return(float64(2))
 			},
 		},
 		{

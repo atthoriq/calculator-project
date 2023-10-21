@@ -14,7 +14,7 @@ func floatEqual(a, b float64) bool {
 	return a == b
 }
 
-func TestCalculator_AddCurrent(t *testing.T) {
+func TestCalculator_Add(t *testing.T) {
 	type fields struct {
 		history []*command
 		current float64
@@ -65,15 +65,15 @@ func TestCalculator_AddCurrent(t *testing.T) {
 				history: tt.fields.history,
 				current: tt.fields.current,
 			}
-			if got := c.AddCurrent(tt.args.a); !floatEqual(got, tt.want) {
-				t.Errorf("Calculator.AddCurrent() = %v, want %v", got, tt.want)
+			if got := c.Add(tt.args.a); !floatEqual(got, tt.want) {
+				t.Errorf("Calculator.Add() = %v, want %v", got, tt.want)
 			}
 			tt.expectation(c)
 		})
 	}
 }
 
-func TestCalculator_SubtractCurrent(t *testing.T) {
+func TestCalculator_Subtract(t *testing.T) {
 	type fields struct {
 		history []*command
 		current float64
@@ -125,15 +125,15 @@ func TestCalculator_SubtractCurrent(t *testing.T) {
 				history: tt.fields.history,
 				current: tt.fields.current,
 			}
-			if got := c.SubtractCurrent(tt.args.a); !floatEqual(got, tt.want) {
-				t.Errorf("Calculator.SubtractCurrent() = %v, want %v", got, tt.want)
+			if got := c.Subtract(tt.args.a); !floatEqual(got, tt.want) {
+				t.Errorf("Calculator.Subtract() = %v, want %v", got, tt.want)
 			}
 			tt.expectation(c)
 		})
 	}
 }
 
-func TestCalculator_MultiplyCurrent(t *testing.T) {
+func TestCalculator_Multiply(t *testing.T) {
 	type fields struct {
 		history []*command
 		current float64
@@ -200,15 +200,15 @@ func TestCalculator_MultiplyCurrent(t *testing.T) {
 				history: tt.fields.history,
 				current: tt.fields.current,
 			}
-			if got := c.MultiplyCurrent(tt.args.a); !floatEqual(got, tt.want) {
-				t.Errorf("Calculator.MultiplyCurrent() = %v, want %v", got, tt.want)
+			if got := c.Multiply(tt.args.a); !floatEqual(got, tt.want) {
+				t.Errorf("Calculator.Multiply() = %v, want %v", got, tt.want)
 			}
 			tt.expectation(c)
 		})
 	}
 }
 
-func TestCalculator_DivideCurrent(t *testing.T) {
+func TestCalculator_Divide(t *testing.T) {
 	type fields struct {
 		history []*command
 		current float64
@@ -290,15 +290,15 @@ func TestCalculator_DivideCurrent(t *testing.T) {
 				history: tt.fields.history,
 				current: tt.fields.current,
 			}
-			if got := c.DivideCurrent(tt.args.a); !floatEqual(got, tt.want) {
-				t.Errorf("Calculator.DivideCurrent() = %v, want %v", got, tt.want)
+			if got := c.Divide(tt.args.a); !floatEqual(got, tt.want) {
+				t.Errorf("Calculator.Divide() = %v, want %v", got, tt.want)
 			}
 			tt.expectation(c)
 		})
 	}
 }
 
-func TestCalculator_NegCurrent(t *testing.T) {
+func TestCalculator_Neg(t *testing.T) {
 	type fields struct {
 		history []*command
 		current float64
@@ -352,15 +352,15 @@ func TestCalculator_NegCurrent(t *testing.T) {
 				history: tt.fields.history,
 				current: tt.fields.current,
 			}
-			if got := c.NegCurrent(); !floatEqual(got, tt.want) {
-				t.Errorf("Calculator.NegCurrent() = %v, want %v", got, tt.want)
+			if got := c.Neg(); !floatEqual(got, tt.want) {
+				t.Errorf("Calculator.Neg() = %v, want %v", got, tt.want)
 			}
 			tt.expectation(c)
 		})
 	}
 }
 
-func TestCalculator_AbsCurrent(t *testing.T) {
+func TestCalculator_Abs(t *testing.T) {
 	type fields struct {
 		history []*command
 		current float64
@@ -414,15 +414,15 @@ func TestCalculator_AbsCurrent(t *testing.T) {
 				history: tt.fields.history,
 				current: tt.fields.current,
 			}
-			if got := c.AbsCurrent(); !floatEqual(got, tt.want) {
-				t.Errorf("Calculator.AbsCurrent() = %v, want %v", got, tt.want)
+			if got := c.Abs(); !floatEqual(got, tt.want) {
+				t.Errorf("Calculator.Abs() = %v, want %v", got, tt.want)
 			}
 			tt.expectation(c)
 		})
 	}
 }
 
-func TestCalculator_RootCurrent(t *testing.T) {
+func TestCalculator_Root(t *testing.T) {
 	type fields struct {
 		history []*command
 		current float64
@@ -534,15 +534,15 @@ func TestCalculator_RootCurrent(t *testing.T) {
 				history: tt.fields.history,
 				current: tt.fields.current,
 			}
-			if got := c.RootCurrent(tt.args.a); !floatEqual(got, tt.want) {
-				t.Errorf("Calculator.RootCurrent() = %v, want %v", got, tt.want)
+			if got := c.Root(tt.args.a); !floatEqual(got, tt.want) {
+				t.Errorf("Calculator.Root() = %v, want %v", got, tt.want)
 			}
 			tt.expectation(c)
 		})
 	}
 }
 
-func TestCalculator_PowCurrent(t *testing.T) {
+func TestCalculator_Pow(t *testing.T) {
 	type fields struct {
 		history []*command
 		current float64
@@ -609,8 +609,8 @@ func TestCalculator_PowCurrent(t *testing.T) {
 				history: tt.fields.history,
 				current: tt.fields.current,
 			}
-			if got := c.PowCurrent(tt.args.a); !floatEqual(got, tt.want) {
-				t.Errorf("Calculator.PowCurrent() = %v, want %v", got, tt.want)
+			if got := c.Pow(tt.args.a); !floatEqual(got, tt.want) {
+				t.Errorf("Calculator.Pow() = %v, want %v", got, tt.want)
 			}
 			tt.expectation(c)
 		})
@@ -636,8 +636,7 @@ func TestCalculator_Cancel(t *testing.T) {
 			},
 			want: 0,
 			expectation: func(c *Calculator) {
-				assert.Len(t, c.history, 1)
-				assert.Equal(t, c.history[0].op, cancelOp)
+				assert.Len(t, c.history, 0)
 			},
 		},
 		{
@@ -648,8 +647,25 @@ func TestCalculator_Cancel(t *testing.T) {
 			},
 			want: 0,
 			expectation: func(c *Calculator) {
-				assert.Len(t, c.history, 1)
-				assert.Equal(t, c.history[0].op, cancelOp)
+				assert.Len(t, c.history, 0)
+			},
+		},
+		{
+			name: "current non zero - return 0",
+			fields: fields{
+				history: []*command{
+					{
+						op: addOp,
+						args: []float64{
+							1,
+						},
+					},
+				},
+				current: 1,
+			},
+			want: 0,
+			expectation: func(c *Calculator) {
+				assert.Len(t, c.history, 0)
 			},
 		},
 	}
@@ -704,128 +720,7 @@ func TestCalculator_Repeat(t *testing.T) {
 			want:    14,
 			wantErr: false,
 			expectation: func(c *Calculator) {
-				assert.Len(t, c.history, 3)
-				assert.Equal(t, c.history[2].op, repeatOp)
-			},
-		},
-		{
-			name: "repeat normal with cancel",
-			fields: fields{
-				history: []*command{
-					{
-						op:   addOp,
-						args: []float64{5},
-					},
-					{
-						op:   cancelOp,
-						args: []float64{},
-					},
-					{
-						op:   addOp,
-						args: []float64{2},
-					},
-				},
-				current: 2,
-			},
-			args: args{
-				a: 3,
-			},
-			want:    2,
-			wantErr: false,
-			expectation: func(c *Calculator) {
 				assert.Len(t, c.history, 4)
-				assert.Equal(t, c.history[3].op, repeatOp)
-			},
-		},
-		{
-			name: "repeat the repeat command",
-			fields: fields{
-				history: []*command{
-					{
-						op:   addOp,
-						args: []float64{5},
-					},
-					{
-						op:   addOp,
-						args: []float64{2},
-					},
-					{
-						op:   repeatOp,
-						args: []float64{2},
-					},
-				},
-				current: 14,
-			},
-			args: args{
-				a: 1,
-			},
-			want:    21,
-			wantErr: false,
-			expectation: func(c *Calculator) {
-				assert.Len(t, c.history, 4)
-				assert.Equal(t, c.history[3].op, repeatOp)
-			},
-		},
-		{
-			name: "repeat N steps but N+m, where m is between N and latest step, there is a repeat command",
-			fields: fields{
-				history: []*command{
-					{
-						op:   addOp,
-						args: []float64{5},
-					},
-					{
-						op:   addOp,
-						args: []float64{2},
-					},
-					{
-						op:   repeatOp,
-						args: []float64{2},
-					},
-				},
-				current: 14,
-			},
-			args: args{
-				a: 2,
-			},
-			want:    23,
-			wantErr: false,
-			expectation: func(c *Calculator) {
-				assert.Len(t, c.history, 4)
-				assert.Equal(t, c.history[3].op, repeatOp)
-			},
-		},
-		{
-			name: "repeat N steps but N+m, where m is between N and latest step, there is a couple of repeat command",
-			fields: fields{
-				history: []*command{
-					{
-						op:   addOp,
-						args: []float64{5},
-					},
-					{
-						op:   addOp,
-						args: []float64{2},
-					},
-					{
-						op:   repeatOp,
-						args: []float64{2},
-					},
-					{
-						op:   repeatOp,
-						args: []float64{1},
-					},
-				},
-				current: 21,
-			},
-			args: args{
-				a: 2,
-			},
-			want:    35,
-			wantErr: false,
-			expectation: func(c *Calculator) {
-				assert.Len(t, c.history, 5)
-				assert.Equal(t, c.history[4].op, repeatOp)
 			},
 		},
 		{
@@ -840,29 +735,7 @@ func TestCalculator_Repeat(t *testing.T) {
 			want:    0,
 			wantErr: false,
 			expectation: func(c *Calculator) {
-				assert.Len(t, c.history, 1)
-				assert.Equal(t, c.history[0].op, repeatOp)
-			},
-		},
-		{
-			name: "repeat N but there is no computation yet, just repeats",
-			fields: fields{
-				history: []*command{
-					{
-						op:   repeatOp,
-						args: []float64{2},
-					},
-				},
-				current: 0,
-			},
-			args: args{
-				a: 2,
-			},
-			want:    0,
-			wantErr: false,
-			expectation: func(c *Calculator) {
-				assert.Len(t, c.history, 2)
-				assert.Equal(t, c.history[1].op, repeatOp)
+				assert.Len(t, c.history, 0)
 			},
 		},
 		{
@@ -883,7 +756,6 @@ func TestCalculator_Repeat(t *testing.T) {
 			wantErr: false,
 			expectation: func(c *Calculator) {
 				assert.Len(t, c.history, 2)
-				assert.Equal(t, c.history[1].op, repeatOp)
 			},
 		},
 		{
@@ -921,6 +793,143 @@ func TestCalculator_Repeat(t *testing.T) {
 				t.Errorf("Calculator.Repeat() err = %v", err)
 			}
 			tt.expectation(c)
+		})
+	}
+}
+
+func TestCalculator_Repeat_With_Non_Math_Op(t *testing.T) {
+	type fields struct {
+		history []*command
+		current float64
+	}
+	type args struct {
+		a float64
+	}
+	tests := []struct {
+		name                 string
+		fields               fields
+		args                 args
+		want                 float64
+		wantErr              bool
+		preRepeatExpectation func(c *Calculator)
+	}{
+		{
+			name: "cancel then repeat - current should be 0",
+			fields: fields{
+				history: []*command{
+					{
+						op:   addOp,
+						args: []float64{5},
+					},
+					{
+						op:   addOp,
+						args: []float64{2},
+					},
+				},
+				current: 7,
+			},
+			args: args{
+				a: 2,
+			},
+			want:    0.0,
+			wantErr: false,
+			preRepeatExpectation: func(c *Calculator) {
+				c.Cancel()
+			},
+		},
+		{
+			name: "cancel, doing some mathematical operations, repeat - it will calculate the newest history",
+			fields: fields{
+				history: []*command{
+					{
+						op:   addOp,
+						args: []float64{5},
+					},
+					{
+						op:   addOp,
+						args: []float64{2},
+					},
+				},
+				current: 7,
+			},
+			args: args{
+				a: 2,
+			},
+			want:    2.0,
+			wantErr: false,
+			preRepeatExpectation: func(c *Calculator) {
+				c.Cancel()
+				c.Add(1)
+			},
+		},
+		{
+			name: "cancel, doing some mathematical operations, repeat, then repeat - there will be no repeat chain",
+			fields: fields{
+				history: []*command{
+					{
+						op:   addOp,
+						args: []float64{5},
+					},
+					{
+						op:   addOp,
+						args: []float64{2},
+					},
+				},
+				current: 7,
+			},
+			args: args{
+				a: 1,
+			},
+			want:    150.0,
+			wantErr: false,
+			preRepeatExpectation: func(c *Calculator) {
+				c.Cancel()
+				c.Add(1)
+				c.Multiply(5) // 5
+				c.Repeat(2)   // 30 -> add 1 multiply 5 add 1 multiply 5
+				// repeat 3 -> add 1 multiply 5 add 1 multiply 5 + multiply 5 add 1 multiply 5
+			},
+		},
+		{
+			name: "repeat chain",
+			fields: fields{
+				history: []*command{
+					{
+						op:   addOp,
+						args: []float64{5},
+					},
+					{
+						op:   multiplyOp,
+						args: []float64{2},
+					},
+				},
+				current: 10,
+			},
+			args: args{
+				a: 3,
+			},
+			want:    130.0,
+			wantErr: false,
+			preRepeatExpectation: func(c *Calculator) {
+				c.Repeat(2) // 10 + 5 * 2 = 30 -> add 5; multuply 2; add 5; multiply 2
+			},
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			c := &Calculator{
+				history: tt.fields.history,
+				current: tt.fields.current,
+			}
+
+			tt.preRepeatExpectation(c)
+			got, err := c.Repeat(tt.args.a) // 30 * 5
+			if !floatEqual(got, tt.want) {
+				t.Errorf("Calculator.Repeat() = %v, want %v", got, tt.want)
+			}
+			if tt.wantErr != (err != nil) {
+				t.Errorf("Calculator.Repeat() err = %v", err)
+			}
 		})
 	}
 }

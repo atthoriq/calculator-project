@@ -42,14 +42,13 @@ help             : show the manual`
 
 // the interface is intended to mock the calculator easier
 type Calculator interface {
-	AddCurrent(a float64) float64
-	SubtractCurrent(a float64) float64
-	MultiplyCurrent(a float64) float64
-	DivideCurrent(a float64) float64
-	NegCurrent() float64
-	AbsCurrent() float64
-	RootCurrent(a float64) float64
-	PowCurrent(a float64) float64
+	Add(a float64) float64
+	Subtract(a float64) float64
+	Multiply(a float64) float64
+	Divide(a float64) float64
+	Abs() float64
+	Root(a float64) float64
+	Pow(a float64) float64
 	Repeat(a float64) (float64, error)
 	Cancel() float64
 }
@@ -68,79 +67,65 @@ func InitCalculatorHandler(calc Calculator) *calculatorHandler {
 // to make no confusion, any commands requires only 1 argument will return error if they're given 2 or more
 func (ch *calculatorHandler) Handle(command string) (string, error) {
 	// sanitize leading and trailing white spaces
-	command = strings.TrimSpace(command)
-
-	commands := strings.Fields(command)
-	if len(commands) > 2 || len(commands) == 0 {
-		return "", errors.New("invalid input: read manual with 'help' command")
-	}
-
-	op := commands[0]
-
-	var value float64
-	if len(commands) == 2 {
-		valueInStr := commands[1]
-		v, err := strconv.ParseFloat(valueInStr, 64)
-		if err != nil {
-			return "", errors.New("invalid input: read manual with 'help' command")
-		}
-		value = v
+	op, value, err := parseCommand(command)
+	if err != nil {
+		return "", err
 	}
 
 	switch op {
 	case add:
-		res := ch.calculator.AddCurrent(value)
+		res := ch.calculator.Add(value)
 		return fmt.Sprintf("%.2f", res), nil
 	case subtract:
-		res := ch.calculator.SubtractCurrent(value)
+		res := ch.calculator.Subtract(value)
 		return fmt.Sprintf("%.2f", res), nil
 	case multiply:
-		res := ch.calculator.MultiplyCurrent(value)
+		res := ch.calculator.Multiply(value)
 		return fmt.Sprintf("%.2f", res), nil
 	case divide:
-		res := ch.calculator.DivideCurrent(value)
+		res := ch.calculator.Divide(value)
 		return fmt.Sprintf("%.2f", res), nil
 	case neg:
-		if len(commands) > 1 {
+		if value > 0 {
 			return "", errors.New("invalid input: read manual with 'help' command")
 		}
 
-		res := ch.calculator.NegCurrent()
+		res := ch.calculator.Multiply(-1)
 		return fmt.Sprintf("%.2f", res), nil
 	case abs:
-		if len(commands) > 1 {
+		if value > 0 {
 			return "", errors.New("invalid input: read manual with 'help' command")
 		}
 
-		res := ch.calculator.AbsCurrent()
+		res := ch.calculator.Abs()
 		return fmt.Sprintf("%.2f", res), nil
 	case sqrt:
-		if len(commands) > 1 {
+		if value > 0 {
 			return "", errors.New("invalid input: read manual with 'help' command")
 		}
 
-		res := ch.calculator.RootCurrent(2)
+		res := ch.calculator.Root(2)
 		return fmt.Sprintf("%.2f", res), nil
 	case cbrt:
-		if len(commands) > 1 {
+		if value > 0 {
 			return "", errors.New("invalid input: read manual with 'help' command")
 		}
 
-		res := ch.calculator.RootCurrent(3)
+		res := ch.calculator.Root(3)
 		return fmt.Sprintf("%.2f", res), nil
 	case sqr:
-		if len(commands) > 1 {
+		if value > 0 {
 			return "", errors.New("invalid input: read manual with 'help' command")
 		}
 
-		res := ch.calculator.PowCurrent(2)
+		res := ch.calculator.Pow(2)
 		return fmt.Sprintf("%.2f", res), nil
 	case cube:
-		if len(commands) > 1 {
+		if value > 0 {
 			return "", errors.New("invalid input: read manual with 'help' command")
 		}
 
-		res := ch.calculator.PowCurrent(3)
+		res := ch.calculator.Pow(3)
 		return fmt.Sprintf("%.2f", res), nil
 	case repeat:
 		res, err := ch.calculator.Repeat(value)
@@ -149,13 +134,13 @@ func (ch *calculatorHandler) Handle(command string) (string, error) {
 		res := ch.calculator.Cancel()
 		return fmt.Sprintf("%.2f", res), nil
 	case exit:
-		if len(commands) > 1 {
+		if value > 0 {
 			return "", errors.New("invalid input: read manual with 'help' command")
 		}
 
 		return "", nil
 	case help:
-		if len(commands) > 1 {
+		if value > 0 {
 			return "", errors.New("invalid input: read manual with 'help' command")
 		}
 
@@ -163,4 +148,25 @@ func (ch *calculatorHandler) Handle(command string) (string, error) {
 	default:
 		return "", errors.New("not supported operation")
 	}
+}
+
+func parseCommand(command string) (op string, val float64, err error) {
+	command = strings.TrimSpace(command)
+
+	commands := strings.Fields(command)
+	if len(commands) > 2 || len(commands) == 0 {
+		return "", 0, errors.New("invalid input: read manual with 'help' command")
+	}
+
+	op = commands[0]
+	if len(commands) == 2 {
+		valueInStr := commands[1]
+		v, err := strconv.ParseFloat(valueInStr, 64)
+		if err != nil {
+			return "", 0, errors.New("invalid input: read manual with 'help' command")
+		}
+		val = v
+	}
+
+	return op, val, nil
 }

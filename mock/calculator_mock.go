@@ -32,116 +32,102 @@ func (m *MockCalculator) EXPECT() *MockCalculatorMockRecorder {
 	return m.recorder
 }
 
-// AddCurrent mocks base method
-func (m *MockCalculator) AddCurrent(a float64) float64 {
+// Add mocks base method
+func (m *MockCalculator) Add(a float64) float64 {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "AddCurrent", a)
+	ret := m.ctrl.Call(m, "Add", a)
 	ret0, _ := ret[0].(float64)
 	return ret0
 }
 
-// AddCurrent indicates an expected call of AddCurrent
-func (mr *MockCalculatorMockRecorder) AddCurrent(a interface{}) *gomock.Call {
+// Add indicates an expected call of Add
+func (mr *MockCalculatorMockRecorder) Add(a interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "AddCurrent", reflect.TypeOf((*MockCalculator)(nil).AddCurrent), a)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Add", reflect.TypeOf((*MockCalculator)(nil).Add), a)
 }
 
-// SubtractCurrent mocks base method
-func (m *MockCalculator) SubtractCurrent(a float64) float64 {
+// Subtract mocks base method
+func (m *MockCalculator) Subtract(a float64) float64 {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "SubtractCurrent", a)
+	ret := m.ctrl.Call(m, "Subtract", a)
 	ret0, _ := ret[0].(float64)
 	return ret0
 }
 
-// SubtractCurrent indicates an expected call of SubtractCurrent
-func (mr *MockCalculatorMockRecorder) SubtractCurrent(a interface{}) *gomock.Call {
+// Subtract indicates an expected call of Subtract
+func (mr *MockCalculatorMockRecorder) Subtract(a interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SubtractCurrent", reflect.TypeOf((*MockCalculator)(nil).SubtractCurrent), a)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Subtract", reflect.TypeOf((*MockCalculator)(nil).Subtract), a)
 }
 
-// MultiplyCurrent mocks base method
-func (m *MockCalculator) MultiplyCurrent(a float64) float64 {
+// Multiply mocks base method
+func (m *MockCalculator) Multiply(a float64) float64 {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "MultiplyCurrent", a)
+	ret := m.ctrl.Call(m, "Multiply", a)
 	ret0, _ := ret[0].(float64)
 	return ret0
 }
 
-// MultiplyCurrent indicates an expected call of MultiplyCurrent
-func (mr *MockCalculatorMockRecorder) MultiplyCurrent(a interface{}) *gomock.Call {
+// Multiply indicates an expected call of Multiply
+func (mr *MockCalculatorMockRecorder) Multiply(a interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "MultiplyCurrent", reflect.TypeOf((*MockCalculator)(nil).MultiplyCurrent), a)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Multiply", reflect.TypeOf((*MockCalculator)(nil).Multiply), a)
 }
 
-// DivideCurrent mocks base method
-func (m *MockCalculator) DivideCurrent(a float64) float64 {
+// Divide mocks base method
+func (m *MockCalculator) Divide(a float64) float64 {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "DivideCurrent", a)
+	ret := m.ctrl.Call(m, "Divide", a)
 	ret0, _ := ret[0].(float64)
 	return ret0
 }
 
-// DivideCurrent indicates an expected call of DivideCurrent
-func (mr *MockCalculatorMockRecorder) DivideCurrent(a interface{}) *gomock.Call {
+// Divide indicates an expected call of Divide
+func (mr *MockCalculatorMockRecorder) Divide(a interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DivideCurrent", reflect.TypeOf((*MockCalculator)(nil).DivideCurrent), a)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Divide", reflect.TypeOf((*MockCalculator)(nil).Divide), a)
 }
 
-// NegCurrent mocks base method
-func (m *MockCalculator) NegCurrent() float64 {
+// Abs mocks base method
+func (m *MockCalculator) Abs() float64 {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "NegCurrent")
+	ret := m.ctrl.Call(m, "Abs")
 	ret0, _ := ret[0].(float64)
 	return ret0
 }
 
-// NegCurrent indicates an expected call of NegCurrent
-func (mr *MockCalculatorMockRecorder) NegCurrent() *gomock.Call {
+// Abs indicates an expected call of Abs
+func (mr *MockCalculatorMockRecorder) Abs() *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NegCurrent", reflect.TypeOf((*MockCalculator)(nil).NegCurrent))
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Abs", reflect.TypeOf((*MockCalculator)(nil).Abs))
 }
 
-// AbsCurrent mocks base method
-func (m *MockCalculator) AbsCurrent() float64 {
+// Root mocks base method
+func (m *MockCalculator) Root(a float64) float64 {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "AbsCurrent")
+	ret := m.ctrl.Call(m, "Root", a)
 	ret0, _ := ret[0].(float64)
 	return ret0
 }
 
-// AbsCurrent indicates an expected call of AbsCurrent
-func (mr *MockCalculatorMockRecorder) AbsCurrent() *gomock.Call {
+// Root indicates an expected call of Root
+func (mr *MockCalculatorMockRecorder) Root(a interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "AbsCurrent", reflect.TypeOf((*MockCalculator)(nil).AbsCurrent))
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Root", reflect.TypeOf((*MockCalculator)(nil).Root), a)
 }
 
-// RootCurrent mocks base method
-func (m *MockCalculator) RootCurrent(a float64) float64 {
+// Pow mocks base method
+func (m *MockCalculator) Pow(a float64) float64 {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "RootCurrent", a)
+	ret := m.ctrl.Call(m, "Pow", a)
 	ret0, _ := ret[0].(float64)
 	return ret0
 }
 
-// RootCurrent indicates an expected call of RootCurrent
-func (mr *MockCalculatorMockRecorder) RootCurrent(a interface{}) *gomock.Call {
+// Pow indicates an expected call of Pow
+func (mr *MockCalculatorMockRecorder) Pow(a interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "RootCurrent", reflect.TypeOf((*MockCalculator)(nil).RootCurrent), a)
-}
-
-// PowCurrent mocks base method
-func (m *MockCalculator) PowCurrent(a float64) float64 {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "PowCurrent", a)
-	ret0, _ := ret[0].(float64)
-	return ret0
-}
-
-// PowCurrent indicates an expected call of PowCurrent
-func (mr *MockCalculatorMockRecorder) PowCurrent(a interface{}) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "PowCurrent", reflect.TypeOf((*MockCalculator)(nil).PowCurrent), a)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Pow", reflect.TypeOf((*MockCalculator)(nil).Pow), a)
 }
 
 // Repeat mocks base method

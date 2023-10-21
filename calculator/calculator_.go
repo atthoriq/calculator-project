@@ -37,42 +37,42 @@ func InitCalculator() *Calculator {
 	return c
 }
 
-func (c *Calculator) AddCurrent(a float64) float64 {
+func (c *Calculator) Add(a float64) float64 {
 	c.addHistory(addOp, []float64{a})
-	return c.addOpCurrent(a)
+	return c.addOp(a)
 }
 
-func (c *Calculator) addOpCurrent(a float64) float64 {
+func (c *Calculator) addOp(a float64) float64 {
 	c.current = c.current + a
 	return c.current
 }
 
-func (c *Calculator) SubtractCurrent(a float64) float64 {
+func (c *Calculator) Subtract(a float64) float64 {
 	c.addHistory(subtractOp, []float64{a})
-	return c.subtractOpCurrent(a)
+	return c.subtractOp(a)
 }
 
-func (c *Calculator) subtractOpCurrent(a float64) float64 {
+func (c *Calculator) subtractOp(a float64) float64 {
 	c.current = c.current - a
 	return c.current
 }
 
-func (c *Calculator) MultiplyCurrent(a float64) float64 {
+func (c *Calculator) Multiply(a float64) float64 {
 	c.addHistory(multiplyOp, []float64{a})
-	return c.multiplyOpCurrent(a)
+	return c.multiplyOp(a)
 }
 
-func (c *Calculator) multiplyOpCurrent(a float64) float64 {
+func (c *Calculator) multiplyOp(a float64) float64 {
 	c.current = c.current * a
 	return c.current
 }
 
-func (c *Calculator) DivideCurrent(a float64) float64 {
+func (c *Calculator) Divide(a float64) float64 {
 	c.addHistory(divideOp, []float64{a})
-	return c.divideOpCurrent(a)
+	return c.divideOp(a)
 }
 
-func (c *Calculator) divideOpCurrent(a float64) float64 {
+func (c *Calculator) divideOp(a float64) float64 {
 	if a == 0 {
 		c.current = math.NaN()
 	} else {
@@ -82,32 +82,32 @@ func (c *Calculator) divideOpCurrent(a float64) float64 {
 	return c.current
 }
 
-func (c *Calculator) NegCurrent() float64 {
+func (c *Calculator) Neg() float64 {
 	c.addHistory(negOp, []float64{})
-	return c.negOpCurrent()
+	return c.negOp()
 }
 
-func (c *Calculator) negOpCurrent() float64 {
-	c.current = c.multiplyOpCurrent(-1)
+func (c *Calculator) negOp() float64 {
+	c.current = c.multiplyOp(-1)
 	return c.current
 }
 
-func (c *Calculator) AbsCurrent() float64 {
+func (c *Calculator) Abs() float64 {
 	c.addHistory(absOp, []float64{})
-	return c.absOpCurrent()
+	return c.absOp()
 }
 
-func (c *Calculator) absOpCurrent() float64 {
+func (c *Calculator) absOp() float64 {
 	c.current = math.Abs(c.current)
 	return c.current
 }
 
-func (c *Calculator) RootCurrent(n float64) float64 {
+func (c *Calculator) Root(n float64) float64 {
 	c.addHistory(rootOp, []float64{n})
-	return c.rootOpCurrent(n)
+	return c.rootOp(n)
 }
 
-func (c *Calculator) rootOpCurrent(n float64) float64 {
+func (c *Calculator) rootOp(n float64) float64 {
 	switch n {
 	case 2:
 		c.current = math.Sqrt(c.current)
@@ -120,18 +120,18 @@ func (c *Calculator) rootOpCurrent(n float64) float64 {
 	}
 }
 
-func (c *Calculator) PowCurrent(n float64) float64 {
+func (c *Calculator) Pow(n float64) float64 {
 	c.addHistory(powOp, []float64{n})
-	return c.powOpCurrent(n)
+	return c.powOp(n)
 }
 
-func (c *Calculator) powOpCurrent(n float64) float64 {
+func (c *Calculator) powOp(n float64) float64 {
 	c.current = math.Pow(c.current, n)
 	return c.current
 }
 
 func (c *Calculator) Cancel() float64 {
-	c.addHistory(cancelOp, []float64{})
+	c.resetHistory()
 	return c.cancelOp()
 }
 
@@ -149,9 +149,6 @@ func (c *Calculator) Repeat(n float64) (float64, error) {
 	if err != nil {
 		return 0, err
 	}
-
-	// insert history after successfully computed
-	c.addHistory(repeatOp, []float64{n})
 
 	return res, nil
 }
@@ -174,25 +171,21 @@ func (c *Calculator) repeatFrom(n float64, from int) (float64, error) {
 		args := command.args
 		switch command.op {
 		case addOp:
-			c.addOpCurrent(args[0])
+			c.Add(args[0])
 		case subtractOp:
-			c.subtractOpCurrent(args[0])
+			c.Subtract(args[0])
 		case multiplyOp:
-			c.multiplyOpCurrent(args[0])
+			c.Multiply(args[0])
 		case divideOp:
-			c.divideOpCurrent(args[0])
+			c.Divide(args[0])
 		case negOp:
-			c.negOpCurrent()
+			c.Neg()
 		case rootOp:
-			c.rootOpCurrent(args[0])
+			c.Root(args[0])
 		case powOp:
-			c.powOpCurrent(args[0])
-		case cancelOp:
-			c.cancelOp()
+			c.Pow(args[0])
 		case absOp:
-			c.absOpCurrent()
-		case repeatOp:
-			_, err = c.repeatFrom(args[0], i) // repeat from itself
+			c.Abs()
 		}
 
 		if err != nil {
@@ -205,6 +198,10 @@ func (c *Calculator) repeatFrom(n float64, from int) (float64, error) {
 
 func (c *Calculator) addHistory(op string, args []float64) {
 	c.history = append(c.history, &command{op, args})
+}
+
+func (c *Calculator) resetHistory() {
+	c.history = make([]*command, 0)
 }
 
 func (c *Calculator) readHistory() []string {

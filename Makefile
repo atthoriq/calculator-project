@@ -9,5 +9,5 @@ test:
 	go clean -testcache
 	go test ./... -cover
 
-mock:
+mockpkg:
 	mockgen --source=handler.go --destination=mock/calculator_mock.go
