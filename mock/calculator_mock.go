@@ -6,6 +6,7 @@ package mock_main
 
 import (
 	gomock "github.com/golang/mock/gomock"
+	calculator "gitlab.com/atthoriq/calculator-project/calculator"
 	reflect "reflect"
 )
 
@@ -33,10 +34,10 @@ func (m *MockCalculator) EXPECT() *MockCalculatorMockRecorder {
 }
 
 // Add mocks base method
-func (m *MockCalculator) Add(a float64) float64 {
+func (m *MockCalculator) Add(a float64) *calculator.NewCalculator {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Add", a)
-	ret0, _ := ret[0].(float64)
+	ret0, _ := ret[0].(*calculator.NewCalculator)
 	return ret0
 }
 
@@ -47,10 +48,10 @@ func (mr *MockCalculatorMockRecorder) Add(a interface{}) *gomock.Call {
 }
 
 // Subtract mocks base method
-func (m *MockCalculator) Subtract(a float64) float64 {
+func (m *MockCalculator) Subtract(a float64) *calculator.NewCalculator {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Subtract", a)
-	ret0, _ := ret[0].(float64)
+	ret0, _ := ret[0].(*calculator.NewCalculator)
 	return ret0
 }
 
@@ -61,10 +62,10 @@ func (mr *MockCalculatorMockRecorder) Subtract(a interface{}) *gomock.Call {
 }
 
 // Multiply mocks base method
-func (m *MockCalculator) Multiply(a float64) float64 {
+func (m *MockCalculator) Multiply(a float64) *calculator.NewCalculator {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Multiply", a)
-	ret0, _ := ret[0].(float64)
+	ret0, _ := ret[0].(*calculator.NewCalculator)
 	return ret0
 }
 
@@ -75,10 +76,10 @@ func (mr *MockCalculatorMockRecorder) Multiply(a interface{}) *gomock.Call {
 }
 
 // Divide mocks base method
-func (m *MockCalculator) Divide(a float64) float64 {
+func (m *MockCalculator) Divide(a float64) *calculator.NewCalculator {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Divide", a)
-	ret0, _ := ret[0].(float64)
+	ret0, _ := ret[0].(*calculator.NewCalculator)
 	return ret0
 }
 
@@ -89,10 +90,10 @@ func (mr *MockCalculatorMockRecorder) Divide(a interface{}) *gomock.Call {
 }
 
 // Abs mocks base method
-func (m *MockCalculator) Abs() float64 {
+func (m *MockCalculator) Abs() *calculator.NewCalculator {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Abs")
-	ret0, _ := ret[0].(float64)
+	ret0, _ := ret[0].(*calculator.NewCalculator)
 	return ret0
 }
 
@@ -103,10 +104,10 @@ func (mr *MockCalculatorMockRecorder) Abs() *gomock.Call {
 }
 
 // Root mocks base method
-func (m *MockCalculator) Root(a float64) float64 {
+func (m *MockCalculator) Root(a int) *calculator.NewCalculator {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Root", a)
-	ret0, _ := ret[0].(float64)
+	ret0, _ := ret[0].(*calculator.NewCalculator)
 	return ret0
 }
 
@@ -117,10 +118,10 @@ func (mr *MockCalculatorMockRecorder) Root(a interface{}) *gomock.Call {
 }
 
 // Pow mocks base method
-func (m *MockCalculator) Pow(a float64) float64 {
+func (m *MockCalculator) Pow(a float64) *calculator.NewCalculator {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Pow", a)
-	ret0, _ := ret[0].(float64)
+	ret0, _ := ret[0].(*calculator.NewCalculator)
 	return ret0
 }
 
@@ -131,12 +132,11 @@ func (mr *MockCalculatorMockRecorder) Pow(a interface{}) *gomock.Call {
 }
 
 // Repeat mocks base method
-func (m *MockCalculator) Repeat(a float64) (float64, error) {
+func (m *MockCalculator) Repeat(a int) *calculator.NewCalculator {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Repeat", a)
-	ret0, _ := ret[0].(float64)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
+	ret0, _ := ret[0].(*calculator.NewCalculator)
+	return ret0
 }
 
 // Repeat indicates an expected call of Repeat
@@ -146,10 +146,10 @@ func (mr *MockCalculatorMockRecorder) Repeat(a interface{}) *gomock.Call {
 }
 
 // Cancel mocks base method
-func (m *MockCalculator) Cancel() float64 {
+func (m *MockCalculator) Cancel() *calculator.NewCalculator {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Cancel")
-	ret0, _ := ret[0].(float64)
+	ret0, _ := ret[0].(*calculator.NewCalculator)
 	return ret0
 }
 
@@ -157,4 +157,18 @@ func (m *MockCalculator) Cancel() float64 {
 func (mr *MockCalculatorMockRecorder) Cancel() *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Cancel", reflect.TypeOf((*MockCalculator)(nil).Cancel))
+}
+
+// GetResult mocks base method
+func (m *MockCalculator) GetResult() float64 {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetResult")
+	ret0, _ := ret[0].(float64)
+	return ret0
+}
+
+// GetResult indicates an expected call of GetResult
+func (mr *MockCalculatorMockRecorder) GetResult() *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetResult", reflect.TypeOf((*MockCalculator)(nil).GetResult))
 }

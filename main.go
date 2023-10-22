@@ -14,7 +14,7 @@ func main() {
 	defer fmt.Println("Good bye!")
 
 	// initialize handler and dependencies
-	calc := calculator.InitCalculator()
+	calc := calculator.InitNewCalculator()
 	handler := InitCalculatorHandler(calc)
 	if handler == nil {
 		log.Fatal("fail initializing handler")

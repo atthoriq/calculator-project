@@ -5,6 +5,8 @@ import (
 	"fmt"
 	"strconv"
 	"strings"
+
+	"gitlab.com/atthoriq/calculator-project/calculator"
 )
 
 const (
@@ -42,15 +44,17 @@ help             : show the manual`
 
 // the interface is intended to mock the calculator easier
 type Calculator interface {
-	Add(a float64) float64
-	Subtract(a float64) float64
-	Multiply(a float64) float64
-	Divide(a float64) float64
-	Abs() float64
-	Root(a float64) float64
-	Pow(a float64) float64
-	Repeat(a float64) (float64, error)
-	Cancel() float64
+	// TODO how to define the interface cleaner
+	Add(a float64) *calculator.NewCalculator
+	Subtract(a float64) *calculator.NewCalculator
+	Multiply(a float64) *calculator.NewCalculator
+	Divide(a float64) *calculator.NewCalculator
+	Abs() *calculator.NewCalculator
+	Root(a int) *calculator.NewCalculator
+	Pow(a float64) *calculator.NewCalculator
+	Repeat(a int) *calculator.NewCalculator
+	Cancel() *calculator.NewCalculator
+	GetResult() float64
 }
 
 type calculatorHandler struct {
@@ -74,64 +78,64 @@ func (ch *calculatorHandler) Handle(command string) (string, error) {
 
 	switch op {
 	case add:
-		res := ch.calculator.Add(value)
+		res := ch.calculator.Add(value).GetResult()
 		return fmt.Sprintf("%.2f", res), nil
 	case subtract:
-		res := ch.calculator.Subtract(value)
+		res := ch.calculator.Subtract(value).GetResult()
 		return fmt.Sprintf("%.2f", res), nil
 	case multiply:
-		res := ch.calculator.Multiply(value)
+		res := ch.calculator.Multiply(value).GetResult()
 		return fmt.Sprintf("%.2f", res), nil
 	case divide:
-		res := ch.calculator.Divide(value)
+		res := ch.calculator.Divide(value).GetResult()
 		return fmt.Sprintf("%.2f", res), nil
 	case neg:
 		if value > 0 {
 			return "", errors.New("invalid input: read manual with 'help' command")
 		}
 
-		res := ch.calculator.Multiply(-1)
+		res := ch.calculator.Multiply(-1).GetResult()
 		return fmt.Sprintf("%.2f", res), nil
 	case abs:
 		if value > 0 {
 			return "", errors.New("invalid input: read manual with 'help' command")
 		}
 
-		res := ch.calculator.Abs()
+		res := ch.calculator.Abs().GetResult()
 		return fmt.Sprintf("%.2f", res), nil
 	case sqrt:
 		if value > 0 {
 			return "", errors.New("invalid input: read manual with 'help' command")
 		}
 
-		res := ch.calculator.Root(2)
+		res := ch.calculator.Root(2).GetResult()
 		return fmt.Sprintf("%.2f", res), nil
 	case cbrt:
 		if value > 0 {
 			return "", errors.New("invalid input: read manual with 'help' command")
 		}
 
-		res := ch.calculator.Root(3)
+		res := ch.calculator.Root(3).GetResult()
 		return fmt.Sprintf("%.2f", res), nil
 	case sqr:
 		if value > 0 {
 			return "", errors.New("invalid input: read manual with 'help' command")
 		}
 
-		res := ch.calculator.Pow(2)
+		res := ch.calculator.Pow(2).GetResult()
 		return fmt.Sprintf("%.2f", res), nil
 	case cube:
 		if value > 0 {
 			return "", errors.New("invalid input: read manual with 'help' command")
 		}
 
-		res := ch.calculator.Pow(3)
+		res := ch.calculator.Pow(3).GetResult()
 		return fmt.Sprintf("%.2f", res), nil
 	case repeat:
-		res, err := ch.calculator.Repeat(value)
+		res := ch.calculator.Repeat(int(value)).GetResult()
 		return fmt.Sprintf("%.2f", res), err
 	case cancel:
-		res := ch.calculator.Cancel()
+		res := ch.calculator.Cancel().GetResult()
 		return fmt.Sprintf("%.2f", res), nil
 	case exit:
 		if value > 0 {
