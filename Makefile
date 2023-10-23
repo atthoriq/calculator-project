@@ -10,4 +10,4 @@ test:
 	go test ./... -cover
 
 mockpkg:
-	mockgen --source=handler.go --destination=mock/calculator_mock.go
+	mockgen --source=calculator/new_calculator.go --destination=mock/calculator_mock.go

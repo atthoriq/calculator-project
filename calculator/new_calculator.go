@@ -9,41 +9,54 @@ import (
 	"math"
 )
 
-type NewCalculator struct {
+type newCalculator struct {
 	current           float64
 	currentOperations []operation
 	history           []operation
 }
 
-type operation func(*NewCalculator)
+type operation func(*newCalculator)
 
-func InitNewCalculator() *NewCalculator {
-	return &NewCalculator{0, []operation{}, []operation{}}
+type NewCalculator interface {
+	Add(a float64) NewCalculator
+	Subtract(a float64) NewCalculator
+	Multiply(a float64) NewCalculator
+	Divide(a float64) NewCalculator
+	Abs() NewCalculator
+	Root(a int) NewCalculator
+	Pow(a float64) NewCalculator
+	Repeat(a int) NewCalculator
+	Cancel() NewCalculator
+	GetResult() float64
 }
 
-func (c *NewCalculator) Add(a float64) *NewCalculator {
-	c.currentOperations = append(c.currentOperations, func(nc *NewCalculator) {
+func InitNewCalculator() *newCalculator {
+	return &newCalculator{0, []operation{}, []operation{}}
+}
+
+func (c *newCalculator) Add(a float64) NewCalculator {
+	c.currentOperations = append(c.currentOperations, func(nc *newCalculator) {
 		nc.current += a
 	})
 	return c
 }
 
-func (c *NewCalculator) Subtract(a float64) *NewCalculator {
-	c.currentOperations = append(c.currentOperations, func(nc *NewCalculator) {
+func (c *newCalculator) Subtract(a float64) NewCalculator {
+	c.currentOperations = append(c.currentOperations, func(nc *newCalculator) {
 		nc.current -= a
 	})
 	return c
 }
 
-func (c *NewCalculator) Multiply(a float64) *NewCalculator {
-	c.currentOperations = append(c.currentOperations, func(nc *NewCalculator) {
+func (c *newCalculator) Multiply(a float64) NewCalculator {
+	c.currentOperations = append(c.currentOperations, func(nc *newCalculator) {
 		nc.current *= a
 	})
 	return c
 }
 
-func (c *NewCalculator) Divide(a float64) *NewCalculator {
-	c.currentOperations = append(c.currentOperations, func(nc *NewCalculator) {
+func (c *newCalculator) Divide(a float64) NewCalculator {
+	c.currentOperations = append(c.currentOperations, func(nc *newCalculator) {
 		if a == 0 {
 			nc.current = math.NaN()
 		} else {
@@ -53,15 +66,15 @@ func (c *NewCalculator) Divide(a float64) *NewCalculator {
 	return c
 }
 
-func (c *NewCalculator) Abs() *NewCalculator {
-	c.currentOperations = append(c.currentOperations, func(nc *NewCalculator) {
+func (c *newCalculator) Abs() NewCalculator {
+	c.currentOperations = append(c.currentOperations, func(nc *newCalculator) {
 		c.current = math.Abs(c.current)
 	})
 	return c
 }
 
-func (c *NewCalculator) Root(n int) *NewCalculator {
-	c.currentOperations = append(c.currentOperations, func(nc *NewCalculator) {
+func (c *newCalculator) Root(n int) NewCalculator {
+	c.currentOperations = append(c.currentOperations, func(nc *newCalculator) {
 		switch n {
 		case 2:
 			c.current = math.Sqrt(c.current)
@@ -74,21 +87,21 @@ func (c *NewCalculator) Root(n int) *NewCalculator {
 	return c
 }
 
-func (c *NewCalculator) Pow(n float64) *NewCalculator {
-	c.currentOperations = append(c.currentOperations, func(nc *NewCalculator) {
+func (c *newCalculator) Pow(n float64) NewCalculator {
+	c.currentOperations = append(c.currentOperations, func(nc *newCalculator) {
 		c.current = math.Pow(c.current, n)
 	})
 	return c
 }
 
-func (c *NewCalculator) Cancel() *NewCalculator {
+func (c *newCalculator) Cancel() NewCalculator {
 	c.current = 0
 	c.currentOperations = []operation{}
 	c.history = []operation{}
 	return c
 }
 
-func (c *NewCalculator) Repeat(n int) *NewCalculator {
+func (c *newCalculator) Repeat(n int) NewCalculator {
 	// clean hold operations
 	c.GetResult()
 
@@ -109,7 +122,7 @@ func (c *NewCalculator) Repeat(n int) *NewCalculator {
 	return c
 }
 
-func (c *NewCalculator) GetResult() float64 {
+func (c *newCalculator) GetResult() float64 {
 	for _, op := range c.currentOperations {
 		op(c)
 		c.history = append(c.history, op)

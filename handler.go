@@ -42,26 +42,11 @@ exit             : exit the calculator
 help             : show the manual`
 )
 
-// the interface is intended to mock the calculator easier
-type Calculator interface {
-	// TODO how to define the interface cleaner
-	Add(a float64) *calculator.NewCalculator
-	Subtract(a float64) *calculator.NewCalculator
-	Multiply(a float64) *calculator.NewCalculator
-	Divide(a float64) *calculator.NewCalculator
-	Abs() *calculator.NewCalculator
-	Root(a int) *calculator.NewCalculator
-	Pow(a float64) *calculator.NewCalculator
-	Repeat(a int) *calculator.NewCalculator
-	Cancel() *calculator.NewCalculator
-	GetResult() float64
-}
-
 type calculatorHandler struct {
-	calculator Calculator
+	calculator calculator.NewCalculator
 }
 
-func InitCalculatorHandler(calc Calculator) *calculatorHandler {
+func InitCalculatorHandler(calc calculator.NewCalculator) *calculatorHandler {
 	return &calculatorHandler{
 		calculator: calc,
 	}

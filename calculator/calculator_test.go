@@ -14,7 +14,7 @@ func floatEqual(a, b float64) bool {
 	return a == b
 }
 
-func TestCalculator_Add(t *testing.T) {
+func NewCalculator_Add(t *testing.T) {
 	type fields struct {
 		history []*command
 		current float64
@@ -73,7 +73,7 @@ func TestCalculator_Add(t *testing.T) {
 	}
 }
 
-func TestCalculator_Subtract(t *testing.T) {
+func NewCalculator_Subtract(t *testing.T) {
 	type fields struct {
 		history []*command
 		current float64
@@ -133,7 +133,7 @@ func TestCalculator_Subtract(t *testing.T) {
 	}
 }
 
-func TestCalculator_Multiply(t *testing.T) {
+func NewCalculator_Multiply(t *testing.T) {
 	type fields struct {
 		history []*command
 		current float64
@@ -208,7 +208,7 @@ func TestCalculator_Multiply(t *testing.T) {
 	}
 }
 
-func TestCalculator_Divide(t *testing.T) {
+func NewCalculator_Divide(t *testing.T) {
 	type fields struct {
 		history []*command
 		current float64
@@ -298,7 +298,7 @@ func TestCalculator_Divide(t *testing.T) {
 	}
 }
 
-func TestCalculator_Neg(t *testing.T) {
+func NewCalculator_Neg(t *testing.T) {
 	type fields struct {
 		history []*command
 		current float64
@@ -360,7 +360,7 @@ func TestCalculator_Neg(t *testing.T) {
 	}
 }
 
-func TestCalculator_Abs(t *testing.T) {
+func NewCalculator_Abs(t *testing.T) {
 	type fields struct {
 		history []*command
 		current float64
@@ -422,7 +422,7 @@ func TestCalculator_Abs(t *testing.T) {
 	}
 }
 
-func TestCalculator_Root(t *testing.T) {
+func NewCalculator_Root(t *testing.T) {
 	type fields struct {
 		history []*command
 		current float64
@@ -542,7 +542,7 @@ func TestCalculator_Root(t *testing.T) {
 	}
 }
 
-func TestCalculator_Pow(t *testing.T) {
+func NewCalculator_Pow(t *testing.T) {
 	type fields struct {
 		history []*command
 		current float64
@@ -617,7 +617,7 @@ func TestCalculator_Pow(t *testing.T) {
 	}
 }
 
-func TestCalculator_Cancel(t *testing.T) {
+func NewCalculator_Cancel(t *testing.T) {
 	type fields struct {
 		history []*command
 		current float64
@@ -683,7 +683,7 @@ func TestCalculator_Cancel(t *testing.T) {
 	}
 }
 
-func TestCalculator_Repeat(t *testing.T) {
+func NewCalculator_Repeat(t *testing.T) {
 	type fields struct {
 		history []*command
 		current float64
@@ -797,7 +797,7 @@ func TestCalculator_Repeat(t *testing.T) {
 	}
 }
 
-func TestCalculator_Repeat_With_Non_Math_Op(t *testing.T) {
+func NewCalculator_Repeat_With_Non_Math_Op(t *testing.T) {
 	type fields struct {
 		history []*command
 		current float64
